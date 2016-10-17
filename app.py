@@ -2,7 +2,7 @@ import memcache
 import json
 import requests
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from werkzeug.contrib.cache import SimpleCache, MemcachedCache
@@ -18,7 +18,7 @@ cache = MemcachedCache(['memcache:11211'], 60*60)
 
 class DiceSearchForm(FlaskForm):
     '''Search Form'''
-    text = StringField('Find a Job', validators=[DataRequired()])
+    search_text = StringField('Find a Job', validators=[DataRequired()])
 
 
 def get_count(text, city):
@@ -50,16 +50,18 @@ def index():
               'Portland, OR',
               'Atlanta, GA'
              ]
-    text = 'Linux'
+    text = 'aws'
 
     form = DiceSearchForm()
     if form.validate_on_submit():
-        text = form.text.data
+        text = form.search_text.data
+        if request.form.get('city0'):
+            cities = [city for key, city in request.form.items() if key.startswith('city')]
+            print(cities)
         print(text)
     city_count = [(city, get_count(text, city)) for city in cities]
-    city_count = sorted(city_count, key=lambda x: x[1], reverse=True)
-    print(city_count)
-    print("BUTTTTTTS")
+    city_count = sorted(city_count, key=lambda x: x[1][0], reverse=True)
+#    print(city_count)
     return render_template('index.html', city_count=city_count, form=form, text=text)
 
 if __name__ == '__main__':

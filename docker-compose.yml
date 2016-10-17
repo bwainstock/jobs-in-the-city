@@ -1,0 +1,14 @@
+---
+
+version: '2'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "80:5000"
+    depends_on:
+      - memcache
+  memcache:
+    image: memcached

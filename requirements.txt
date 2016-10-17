@@ -3,3 +3,4 @@ Flask-Bootstrap==3.3.7.0
 Flask-WTF==0.13.1
 python-memcached==1.58
 requests==2.11.1
+gunicorn==19.6.0
