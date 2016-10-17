@@ -1,0 +1,36 @@
+a:hover, a:visited, a:link, a:active
+{
+  text-decoration: none;
+  color: black;
+}
+
+#cities {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.city {
+  -webkit-background-clip: padding-box;
+  -moz-background-clip:    padding;
+  background-clip:         padding-box;
+  border-width: thin;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.city-header {
+  text-align: center;
+  font-size: 1.35em;
+  font-weight: bold;
+
+  padding: .7em;
+  background-color: green;
+}
+
+.city-count {
+  text-align: center;
+  padding: .5em;
+}
