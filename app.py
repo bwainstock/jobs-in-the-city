@@ -50,7 +50,7 @@ def index():
               'Portland, OR',
               'Atlanta, GA'
              ]
-    text = 'aws'
+    text = 'linux'
 
     form = DiceSearchForm()
     if form.validate_on_submit():
@@ -65,4 +65,4 @@ def index():
     return render_template('index.html', city_count=city_count, form=form, text=text)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
